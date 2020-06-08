@@ -1,0 +1,1 @@
+Send, {LWin down}{Down down}{LWin up}{Down up}
