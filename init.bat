@@ -1,2 +1,2 @@
 taskkill /f /im py*
-start "" scripts\overwatch.pyw
+start "" dist\overwatch.exe

@@ -1,3 +1,4 @@
+import pkg_resources.py2_warn
 import pyaudio
 import wave
 import sys

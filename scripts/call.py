@@ -1,3 +1,4 @@
+import pkg_resources.py2_warn
 import pyaudio
 import wave
 import sys
@@ -72,7 +73,7 @@ for i in range(0, p.get_device_count()):
 # Handle no devices available
 if default_device_index == -1:
     log("No device available. Quitting.")
-    exit()
+    sys.exit(0)
 
 
 # Get input or default
@@ -102,7 +103,7 @@ else:
     else:
         log(
             "Selection is output and does not support loopback mode. Quitting.\n")
-        exit()
+        sys.exit(0)
 
 recordtime = 0  # int(input("Record time in seconds [" +  str(
 # recordtime) +  "]: ") or recordtime)
@@ -147,7 +148,7 @@ def get_phone_number():
         output = f.read()
     lines = output.split("\n")
     for line in lines:
-        if(line.startswith("#") is False and line.strip() and line not in ['\n', '\r\n']):
+        if(line.startswith("#") is False and line.strip() and line not in ['\n', '\\n']):
             numbers.append(line.split(" ")[0])
     length = numbers.__len__()
     if(cur_phone_number > length - 1):
@@ -181,14 +182,14 @@ def start_new_call():
         r_delay = 0
     log("Delaying for {} seconds...".format(r_delay))
     check_exit()
-    os.system('/ahk/hangup.ahk')
+    os.system('ahk\hangup.exe')
     time.sleep(r_delay)
     if(first_call is not False):
         first_call = False
     output = get_phone_number()
     phonenumber = output
     log(Fore.CYAN + "New Call to " + output)
-    os.system('/ahk/caller.ahk ' + output)
+    os.system('ahk\caller.exe ' + output)
     with open('cmd/call.calling', 'w') as f:
         f.write(output)
         pass
@@ -230,7 +231,7 @@ def read():
             f.write(phonenumber)
         check_exit()
         # start_new_call()
-        exit()
+        sys.exit(0)
     frame = np.frombuffer(buffer, dtype=np.float32)
     pitch = pitch_o(frame)[0]
     if(round(pitch, 1) < 67 and round(pitch, 1) > 63):
@@ -247,11 +248,11 @@ def check_input():
     lines = sys.stdin.readlines()
     for line in lines:
         if(line == "exit"):
-            exit()
+            sys.exit(0)
 
 
 def close_viewer():
-    os.system("taskkill /f /FI \"WINDOWTITLE eq VIEWER\"")
+    os.system("taskkill /f /im listen.exe")
 
 
 def check_exit():
@@ -259,13 +260,13 @@ def check_exit():
         os.remove("cmd/exit.now")
         log("Exit File Found - Now")
         close_viewer()
-        exit()
+        sys.exit(0)
     if(os.path.exists("cmd/exit.hangup")):
         os.remove("cmd/exit.hangup")
         log("Exit File Found - Hang Up")
         close_viewer()
-        os.system("/ahk/hangup.ahk")
-        exit()
+        os.system("ahk\hangup.exe")
+        sys.exit(0)
 
 
 def cleanup():
@@ -294,18 +295,18 @@ cls()
 log("Setting Volume...")
 os.system("includes\setvol.exe unmute")
 os.system("includes\setvol.exe 75")
-os.system("/ahk/prep.ahk")
+os.system("ahk\prep.exe")
 #os.system("cmd/call includes\windowMode -title \"CALLER\" -mode restore")
 log("Opening Chrome...")
 os.system("start chrome https://hangouts.google.com --window-size=512,512 --window-position=10,10")
 time.sleep(5)
 log("Resizing Windows...")
-os.system('/ahk/resize.ahk')
+os.system('ahk\\resize.exe')
 log("Opening Viewer...")
 sys.stdout.flush()
-os.system('/ahk/down.ahk')
-os.system("start \"VIEWER\" python scripts/listen.py")
-os.system('/ahk/up.ahk')
+os.system('ahk\down.exe')
+os.system("start \"VIEWER\" dist\listen.exe")
+os.system("ahk\\up.exe")
 time.sleep(2)
 
 log("Starting...")
@@ -325,7 +326,6 @@ def main():
             check_input()
         else:
             reading = True
-
             read()
 
 

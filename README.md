@@ -1,10 +1,10 @@
 # Busy Tone Re-Dialer
 ## A script to use the Google Hangouts Web UI to place calls automatically until they are answered by something other than a busy tone
 ### Prerequisites 
-- Virtual Machine Running Windows 10
-- VM Screen Resolution of 1024x768
-- Chrome Installed and Logged In
-- Python 2.7 Installed
+#### On VM:
+- Running Windows 10
+- Screen Resolution of 1024x768
+- Chrome Installed and Logged In to Google
 - AutoHotkey Installed
 
 ### Setup (for control from host)

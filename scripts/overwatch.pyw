@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 
 
@@ -19,7 +20,7 @@ def cleanup():
     unlock()
     clean_cmd()
     os.system("taskkill /f /im chrome.exe")
-    os.system("taskkill /f /im py*")
+    os.system("taskkill /f /im call.exe")
 
 
 if __name__ == "__main__":
@@ -35,4 +36,5 @@ if __name__ == "__main__":
             os.system("taskkill /f /im chrome.exe")
         if(os.path.exists("cmd/cleanup.all")):
             cleanup()
+            sys.exit(0)
         time.sleep(1)
