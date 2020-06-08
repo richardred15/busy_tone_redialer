@@ -5,13 +5,12 @@
 - Running Windows 10
 - Screen Resolution of 1024x768
 - Chrome Installed and Logged In to Google
-- AutoHotkey Installed
 
 ### Setup (for control from host)
 - Create a shared folder between VM and host containing this project's files
 - On VM Run "init.bat"
 - On VM Ensure that all windows are closed
-- On Host Run "host_ui.pyw"
+- On Host Run "host_ui.exe"
 
 ### Setup (for isolated VM)
 - Run scripts\run.bat from root project directory
