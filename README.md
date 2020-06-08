@@ -10,6 +10,7 @@
 ### Setup (for control from host)
 - Create a shared folder between VM and host containing this project's files
 - On VM Run "init.bat"
+- On VM Ensure that all windows are closed
 - On Host Run "host_ui.pyw"
 
 ### Setup (for isolated VM)
